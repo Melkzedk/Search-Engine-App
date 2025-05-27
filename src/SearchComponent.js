@@ -26,25 +26,37 @@ const SearchComponent = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search something..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button type="submit">Search</button>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">Search Engine App</h1>
+      <form onSubmit={handleSearch} className="mb-4">
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search something..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit" className="btn btn-primary">
+            Search
+          </button>
+        </div>
       </form>
 
-      {results.map((item, index) => (
-        <div key={index} style={{ margin: '20px 0' }}>
-          <a href={item.url} target="_blank" rel="noopener noreferrer">
-            <h3>{item.title}</h3>
+      <div className="list-group">
+        {results.map((item, index) => (
+          <a
+            key={index}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="list-group-item list-group-item-action"
+          >
+            <h5 className="mb-1">{item.title}</h5>
+            <p className="mb-1">{item.description}</p>
           </a>
-          <p>{item.description}</p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
