@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FaSearch, FaMicrophone, FaKeyboard, FaCamera } from 'react-icons/fa';
 
 const SearchComponent = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const options = {
         method: 'GET',
@@ -23,25 +26,48 @@ const SearchComponent = () => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Search Engine App</h1>
-      <form onSubmit={handleSearch} className="mb-4">
-        <div className="input-group">
+    <div className="container mt-5" style={{ color: 'white' }}>
+      <h1 className="text-center mb-4">Search</h1>
+
+      <form onSubmit={handleSearch}>
+        <div
+          className="d-flex align-items-center p-2 px-3 mb-3"
+          style={{
+            backgroundColor: '#444',
+            borderRadius: '50px',
+            color: '#fff'
+          }}
+        >
+          <FaSearch className="me-2" />
+
           <input
             type="text"
-            className="form-control"
-            placeholder="Search something..."
+            className="form-control text-light bg-transparent border-0"
+            placeholder="Search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            style={{ boxShadow: 'none' }}
           />
-          <button type="submit" className="btn btn-primary">
-            Search
-          </button>
+
+          <label className="mb-0 me-3">
+            <input type="file" accept="image/*" onChange={() => {}} hidden />
+            <FaKeyboard style={{ cursor: 'pointer' }} />
+          </label>
+
+          <FaMicrophone className="me-3" style={{ cursor: 'pointer' }} />
+
+          <label className="mb-0">
+            <input type="file" accept="image/*" onChange={() => {}} hidden />
+            <FaCamera style={{ cursor: 'pointer' }} />
+          </label>
         </div>
       </form>
+
+      {loading && <p>Loading...</p>}
 
       <div className="list-group">
         {results.map((item, index) => (
