@@ -30,8 +30,8 @@ const SearchComponent = () => {
   };
 
   return (
-    <div className="container mt-5" style={{ color: 'white' }}>
-      <h1 className="text-center mb-4">Search</h1>
+    <div className="container mt-5 p-4" style={{ backgroundColor: '#222', color: 'white', borderRadius: '10px' }}>
+  <h1 className="text-center mb-4">Search</h1>
 
       <form onSubmit={handleSearch}>
         <div
